@@ -4,17 +4,19 @@
 #### By Cameron Anderson
 
 ## Description
-Takes an input text, a string to find, and a string to replace it with. Replaces all instances of the first string with the second.
+Creates a new database-ready ASP .NET Core MVC project. 
 
 
 ## Setup/Installation Requirements
 
-* Clown the git repository from 'https://github.com/camander321/CsharpTemplate.git'.
+* Clone the git repository from 'https://github.com/camander321/CsharpTemplate.git'.
 * Use the console to navigate into the project folder containing the renamer script.
 * Run the script, passing the desired name of your project as an argument.
   * Linux: Run "`./renamer.sh MyProject`"
   * Mac: Run "`bash renamer.sh MyProject`"
-  * Windows: You will need to use a bash shell. Run "`./renamer.sh MyProject`"
+  * Windows: You will need to use a bash shell (git bash, mingw...). Run "`./renamer.sh MyProject`"
+* A new project folder (MyProject.Solutions) will be created outside of the project template folder.
+  * If the template was cloned to 'Desktop/CSharpTemplate', 'Desktop/MyProject.Solutions' will be created.
 
 
 ## Support and contact details
