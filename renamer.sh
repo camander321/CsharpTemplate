@@ -3,42 +3,56 @@
 old="_template_"
 new="$1"
 
-if [ -e "../$new.Solution" ]
+projPath="../$new.Solution"
+
+if [ -e "$projPath" ]
 then
-  echo this project already exists
+  echo "This project already exists"
+  exit 1
+elif [ "$#" -lt 1 ]
+then
+  echo "Please give a project name"
+  exit 1
+elif [ "$#" -gt 1 ]
+then
+  echo "Too many arguments"
   exit 1
 fi
 
-cp -r . "../$new.Solution"
-cd "../$new.Solution"
-rm renamer.sh
+mkdir "$projPath"
+currentDir="$(pwd)"
+cd "$projPath"
+projPath="$(pwd)"
+cd "$currentDir"
 
-list()
+rename()
 {
   for file in *
   do
-    if [ "$file" != "bin" ] && [ "$file" != "obj" ] && [ "$file" != ".git" ]
+    if [ "$file" != "bin" ] && [ "$file" != "obj" ] && [ "$file" != ".git" ] && [ "$file" != "renamer.sh" ]
     then
+      newFile="${file/$old/$new}"
       if [ -d "$file" ]
       then
-        cd $file
-        local currentFile=$file
-        list
-        file=$currentFile
+        cd "$file"
+        local currentFile="$file"
+        local currentNewfile="$newFile"
+        local currentProjPath="$projPath"
+        projPath="$projPath/$newFile"
+        mkdir "$projPath" && echo "Creating directory $newFile in $currentProjPath"
+        rename
+        file="$currentFile"
+        newFile="$currentNewfile"
+        projPath="$currentProjPath"
         cd ..
       else
-        sed -i -e "s/$old/$new/g" "$file"
-      fi
-
-      newname="${file/$old/$new}"
-      oldname="$file"
-      if [ "$oldname" != "$newname" ]
-      then
-        mv "$oldname" "$newname" && echo "$oldname > $newname"
+        sed "s/$old/$new/g" "$file" > "$projPath/$newFile" && echo "Creating file $newFile in $projPath"
       fi
       
     fi
   done
 }
 
-list
+shopt -s dotglob
+rename
+shopt -u dotglob
