@@ -30,6 +30,9 @@ Creates a new database-ready ASP .NET Core MVC project.
 * Razor
 * HTML
 * CSS
+* Bootstrap
+* Javascript
+* JQuery
 * MySQL
 * Bash
 

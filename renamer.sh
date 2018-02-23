@@ -29,7 +29,7 @@ rename()
 {
   for file in *
   do
-    if [ "$file" != "bin" ] && [ "$file" != "obj" ] && [ "$file" != ".git" ] && [ "$file" != "renamer.sh" ]
+    if [ "$file" != "bin" ] && [ "$file" != "obj" ] && [ "$file" != ".git" ] && [ "$file" != "renamer.sh" ] && [ "$file" != "README.md" ]
     then
       newFile="${file/$old/$new}"
       if [ -d "$file" ]
